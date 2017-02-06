@@ -50,7 +50,8 @@ xml内容为：
 @XStreamAlias("china")//类注解(必须写)
 public class ChinaBean {
 
-    @XStreamAsAttribute() @XStreamAlias("dn") //属性注解
+    @XStreamAsAttribute()
+     @XStreamAlias("dn") //属性注解
     private String dn;
     @XStreamImplicit(itemFieldName = "city")//节点注解(必须写)
     private List<CityBean> city;

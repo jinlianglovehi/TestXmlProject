@@ -1,28 +1,77 @@
 package com.huami.watch.watchface.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
+
+import java.util.List;
 
 /**
  * Created by jinliang on 17/1/20.
  */
 
 
+// name="Golden Rooster" name_zh="金鸡报晓" version="1.0"
+
 @XStreamAlias("WatchFace")
 public class WatchFace {
 
-
+    @XStreamAsAttribute()
     @XStreamAlias("name")
     private String  name ;
 
-    @XStreamAlias("name_zh")
-    private String name_zh;
+    @XStreamAsAttribute()
+    @XStreamAlias("zh_name")
+    private String zhname;
 
+    @XStreamAsAttribute()
     @XStreamAlias("version")
     private String version ;
 
 
-    @XStreamAlias("Backguard-list")
-    private BackguardContainer backguardContainer;
+    @XStreamImplicit(itemFieldName = "WatchFaceItem")//节点注解(必须写)
+    private List<WatchFaceItem> watchFaceItemList;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getZhname() {
+        return zhname;
+    }
+
+    public void setZhname(String zhname) {
+        this.zhname = zhname;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
 
+    public List<WatchFaceItem> getWatchFaceItemList() {
+        return watchFaceItemList;
+    }
+
+    public void setWatchFaceItemList(List<WatchFaceItem> watchFaceItemList) {
+        this.watchFaceItemList = watchFaceItemList;
+    }
+
+    @Override
+    public String toString() {
+        return "WatchFace{" +
+                "name='" + name + '\'' +
+                ", zhname='" + zhname + '\'' +
+                ", version='" + version + '\'' +
+                ", watchFaceItemList=" + watchFaceItemList +
+                '}';
+    }
 }

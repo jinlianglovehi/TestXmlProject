@@ -4,8 +4,11 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.huami.watch.watchface.model.WatchFace;
+import com.huami.watch.watchface.model.WatchFaceItem;
 import com.huami.watch.watchface.test.model.ChinaBean;
 import com.huami.watch.watchface.utils.LogUtils;
+import com.huami.watch.watchface.utils.XmlUtils;
 import com.thoughtworks.xstream.XStream;
 
 import org.junit.Before;
@@ -31,7 +34,7 @@ public class TestXmlCreate {
     }
 
      private static final String TAG = TestXmlCreate.class.getSimpleName();
-    @Test
+//    @Test
     public void test(){
 
 
@@ -98,4 +101,41 @@ public class TestXmlCreate {
         }
 
     }
+
+
+
+    @Test
+    public void test02(){
+
+
+        try {
+           WatchFace watchFace  = XmlUtils.getWatchFaceFromInputStream(appContext.getAssets().open("watchface_simple.xml"));
+            if (watchFace!=null){
+                LogUtils.sysPrint(TAG,watchFace.toString());
+
+                LogUtils.sysPrint(TAG,"----watchFaceItemSize:"+ watchFace.getWatchFaceItemList().size());
+
+                List<WatchFaceItem> list = watchFace.getWatchFaceItemList();
+                for (WatchFaceItem item  : list
+                     ) {
+                    LogUtils.sysPrint(TAG,item.toString());
+
+                }
+
+            }else {
+
+                LogUtils.sysPrint(TAG," is null ");
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
 }
