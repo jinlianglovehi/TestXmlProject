@@ -4,7 +4,7 @@ package com.huami.watch.watchface.utils;
  * Created by jinliang on 17/2/4.
  */
 
-import com.huami.watch.watchface.model.WatchFace;
+import com.huami.watch.watchface.model.WatchFaceModule;
 import com.thoughtworks.xstream.XStream;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public class XmlUtils {
      * @param filePath
      * @return
      */
-    public static WatchFace getWatchFaceFromXmlFilePath(String filePath){
+    public static WatchFaceModule getWatchFaceFromXmlFilePath(String filePath){
 
         LogUtils.print(TAG, "getWatchFaceFromXmlFilePath");
         File file = new File(filePath);
@@ -33,7 +33,7 @@ public class XmlUtils {
             LogUtils.print(TAG, "getWatchFaceFromXmlPath file is not exist ");
            return  null;
         }
-        WatchFace watchFace = null ;
+        WatchFaceModule watchFace = null ;
         try {
             InputStream inputStream =new FileInputStream(filePath);
             watchFace = getWatchFaceFromInputStream(inputStream);
@@ -54,7 +54,7 @@ public class XmlUtils {
      * @param inputStream
      * @return
      */
-    public static WatchFace getWatchFaceFromInputStream(InputStream inputStream ){
+    public static WatchFaceModule getWatchFaceFromInputStream(InputStream inputStream ){
 
 
         LogUtils.print(TAG, "getWatchFaceFromInputStream");
@@ -62,12 +62,12 @@ public class XmlUtils {
             LogUtils.print(TAG, "getWatchFaceFromInputStream");
             return null;
         }
-        WatchFace watchFace  = null;
+        WatchFaceModule watchFace  = null;
         if(inputStream!=null) {
             XStream xstream = new XStream();
-            xstream.processAnnotations(WatchFace.class);
-//            xstream.aliasField("name_zh", WatchFace.class, "zhName");
-            watchFace = (WatchFace) xstream.fromXML(inputStream);
+            xstream.processAnnotations(WatchFaceModule.class);
+//            xstream.aliasField("name_zh", WatchFaceModule.class, "zhName");
+            watchFace = (WatchFaceModule) xstream.fromXML(inputStream);
         }
 
         printWatchFaceStatus(watchFace);
@@ -81,19 +81,19 @@ public class XmlUtils {
      * @param xmlString
      * @return
      */
-    public static WatchFace getWatchFaceFromXmlString(String xmlString){
+    public static WatchFaceModule getWatchFaceFromXmlString(String xmlString){
 
 
         LogUtils.print(TAG, "getWatchFaceFromXmlString");
-        WatchFace watchFace = null ;
+        WatchFaceModule watchFace = null ;
         if(xmlString==null){
             LogUtils.print(TAG, "getWatchFaceFromXmlString:xmlString is null ");
            return watchFace ;
         }else {
             XStream xStream = new XStream();
 
-            xStream.processAnnotations(WatchFace.class);
-            watchFace = (WatchFace) xStream.fromXML(xmlString);
+            xStream.processAnnotations(WatchFaceModule.class);
+            watchFace = (WatchFaceModule) xStream.fromXML(xmlString);
             if(watchFace!=null){
                 LogUtils.print(TAG, "getWatchFaceFromXmlString_watchFace:"+watchFace.toString());
             }else{
@@ -113,7 +113,7 @@ public class XmlUtils {
      * @param watchFace
      * @return
      */
-    public static String transforWatchFaceToXml(WatchFace watchFace){
+    public static String transforWatchFaceToXml(WatchFaceModule watchFace){
         XStream stream =new XStream();
         stream.autodetectAnnotations(true);
         String result =  stream.toXML(watchFace);
@@ -127,7 +127,7 @@ public class XmlUtils {
      * 判断输出的是 watchFace 是否为空
      * @return
      */
-    public static void printWatchFaceStatus(WatchFace watchFace){
+    public static void printWatchFaceStatus(WatchFaceModule watchFace){
         if(watchFace==null){
             LogUtils.print(TAG, "printWatchFaceStatus: watchFace is null ");
         }else {

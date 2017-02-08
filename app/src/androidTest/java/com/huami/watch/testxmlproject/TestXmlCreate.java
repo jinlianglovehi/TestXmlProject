@@ -4,20 +4,16 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.huami.watch.watchface.model.WatchFace;
-import com.huami.watch.watchface.model.WatchFaceItem;
-import com.huami.watch.watchface.test.model.ChinaBean;
+import com.huami.watch.watchface.model.WatchFaceModule;
+import com.huami.watch.watchface.model.WatchFaceModuleItem;
 import com.huami.watch.watchface.utils.LogUtils;
 import com.huami.watch.watchface.utils.XmlUtils;
-import com.thoughtworks.xstream.XStream;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,67 +34,6 @@ public class TestXmlCreate {
     public void test(){
 
 
-//        XStream stream = new XStream();
-//        hstream.processAnnotations(TestBean.class);//这里需要注解是你自己根据xml写的bean类(下面附代码解释xml)
-//        TestBean result = (TestBean) stream.fromXML(xmlStr);
-
-        ChinaBean bean =new  ChinaBean() ;
-        bean.setDn("db");
-
-        List<ChinaBean.CityBean> cityBeanList = new ArrayList<ChinaBean.CityBean>();
-
-        ChinaBean.CityBean  cityBean ;
-
-        for (int i = 0; i <10 ; i++) {
-            cityBean = new ChinaBean.CityBean();
-            cityBean.setName("cityname_"+ i);
-            cityBean.setAge(i);
-            cityBean.setYear(2000+i);
-            cityBean.setProv("beijing_"+ i);
-            cityBeanList.add(cityBean);
-        }
-
-        bean.setCity(cityBeanList);
-
-
-
-        XStream stream =new XStream();
-        stream.autodetectAnnotations(true);
-        String result =  stream.toXML(bean);
-        LogUtils.sysPrint(TAG,"result:"+ result);
-
-
-        LogUtils.sysPrint(TAG,"------------------------------");
-
-
-        XStream parseStream = new XStream() ;
-        parseStream.processAnnotations(ChinaBean.class);
-
-        String filePath   = "watchface.xml" ;
-
-        try {
-            InputStream inputStream = appContext.getAssets().open(filePath);
-
-            parseStream.fromXML(inputStream);
-            ChinaBean newChinaBean = (ChinaBean) parseStream.fromXML(result);
-
-            LogUtils.sysPrint(TAG,"db："+ newChinaBean.getDn());
-
-            LogUtils.sysPrint(TAG,"size："+ newChinaBean.getCity().size());
-
-            for (ChinaBean.CityBean  newCityBean:  newChinaBean.getCity()
-                 ) {
-
-                LogUtils.sysPrint(TAG,newCityBean.toString());
-
-
-
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -109,14 +44,14 @@ public class TestXmlCreate {
 
 
         try {
-           WatchFace watchFace  = XmlUtils.getWatchFaceFromInputStream(appContext.getAssets().open("watchface_simple.xml"));
+           WatchFaceModule watchFace  = XmlUtils.getWatchFaceFromInputStream(appContext.getAssets().open("watchface_simple.xml"));
             if (watchFace!=null){
                 LogUtils.sysPrint(TAG,watchFace.toString());
 
                 LogUtils.sysPrint(TAG,"----watchFaceItemSize:"+ watchFace.getWatchFaceItemList().size());
 
-                List<WatchFaceItem> list = watchFace.getWatchFaceItemList();
-                for (WatchFaceItem item  : list
+                List<WatchFaceModuleItem> list = watchFace.getWatchFaceItemList();
+                for (WatchFaceModuleItem item  : list
                      ) {
                     LogUtils.sysPrint(TAG,item.toString());
 

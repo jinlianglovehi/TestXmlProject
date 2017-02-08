@@ -12,16 +12,16 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  */
 
 @XStreamAlias("WatchFaceItem")
-public class WatchFaceItem {
+public class WatchFaceModuleItem {
 
     /**
      *
-     *  <WatchFaceItem type="backguard" config="@drawable/watchface_default_fourteen_bg_2" config_list="@watchface_config/background_list_0" />
-     <WatchFaceItem type="graduation" config="@assets/graduation/01" preview="@assets/graduation/01/preview.png" mask="@drawable/watchface_custom_switch_focus_graduation_fg" config_list="@watchface_config/graduation_list_0" />
-     <WatchFaceItem type="timehand" x="160" y="160" width="320" height="320" config="@assets/timehand/02" preview="@drawable/hand_preview_13" mask="@assets/timehand/watchface_custom_select_timehand_fg_0.png" config_list="@watchface_config/timehand_list_0" />
-     <WatchFaceItem type="datawidget" x="52" y="118" width="84" height="84" dataType="10" model="0" preview="@assets/datawidget/preview_10_0.png" mask="@assets/datawidget/mask_0_fg.png " config_list="@watchface_config/widget_list_0" />
-     <WatchFaceItem type="datawidget" x="119" y="187" width="84" height="84" dataType="1" model="0" preview="@assets/datawidget/preview_1_0.png" mask="@assets/datawidget/mask_1_fg.png " config_list="@watchface_config/widget_list_1" />
-     <WatchFaceItem type="datawidget" x="184" y="118" width="84" height="84" dataType="4" model="0" preview="@assets/datawidget/preview_4_0.png" mask="@assets/datawidget/mask_2_fg.png " config_list="@watchface_config/widget_list_2" />
+     *  <WatchFaceModuleItem type="backguard" config="@drawable/watchface_default_fourteen_bg_2" config_list="@watchface_config/background_list_0" />
+     <WatchFaceModuleItem type="graduation" config="@assets/graduation/01" preview="@assets/graduation/01/preview.png" mask="@drawable/watchface_custom_switch_focus_graduation_fg" config_list="@watchface_config/graduation_list_0" />
+     <WatchFaceModuleItem type="timehand" x="160" y="160" width="320" height="320" config="@assets/timehand/02" preview="@drawable/hand_preview_13" mask="@assets/timehand/watchface_custom_select_timehand_fg_0.png" config_list="@watchface_config/timehand_list_0" />
+     <WatchFaceModuleItem type="datawidget" x="52" y="118" width="84" height="84" dataType="10" model="0" preview="@assets/datawidget/preview_10_0.png" mask="@assets/datawidget/mask_0_fg.png " config_list="@watchface_config/widget_list_0" />
+     <WatchFaceModuleItem type="datawidget" x="119" y="187" width="84" height="84" dataType="1" model="0" preview="@assets/datawidget/preview_1_0.png" mask="@assets/datawidget/mask_1_fg.png " config_list="@watchface_config/widget_list_1" />
+     <WatchFaceModuleItem type="datawidget" x="184" y="118" width="84" height="84" dataType="4" model="0" preview="@assets/datawidget/preview_4_0.png" mask="@assets/datawidget/mask_2_fg.png " config_list="@watchface_config/widget_list_2" />
      */
 
     @XStreamAsAttribute()
@@ -159,7 +159,7 @@ public class WatchFaceItem {
 
     @Override
     public String toString() {
-        return "WatchFaceItem{" +
+        return "WatchFaceModuleItem{" +
                 "type='" + type + '\'' +
                 ", config='" + config + '\'' +
                 ", config_list='" + configlist + '\'' +

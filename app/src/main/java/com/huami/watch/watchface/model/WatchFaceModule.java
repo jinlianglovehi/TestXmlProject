@@ -14,7 +14,7 @@ import java.util.List;
 // name="Golden Rooster" name_zh="金鸡报晓" version="1.0"
 
 @XStreamAlias("WatchFace")
-public class WatchFace {
+public class WatchFaceModule {
 
     @XStreamAsAttribute()
     @XStreamAlias("name")
@@ -30,7 +30,7 @@ public class WatchFace {
 
 
     @XStreamImplicit(itemFieldName = "WatchFaceItem")//节点注解(必须写)
-    private List<WatchFaceItem> watchFaceItemList;
+    private List<WatchFaceModuleItem> watchFaceItemList;
 
     public String getName() {
         return name;
@@ -57,17 +57,17 @@ public class WatchFace {
     }
 
 
-    public List<WatchFaceItem> getWatchFaceItemList() {
+    public List<WatchFaceModuleItem> getWatchFaceItemList() {
         return watchFaceItemList;
     }
 
-    public void setWatchFaceItemList(List<WatchFaceItem> watchFaceItemList) {
+    public void setWatchFaceItemList(List<WatchFaceModuleItem> watchFaceItemList) {
         this.watchFaceItemList = watchFaceItemList;
     }
 
     @Override
     public String toString() {
-        return "WatchFace{" +
+        return "WatchFaceModule{" +
                 "name='" + name + '\'' +
                 ", zhname='" + zhname + '\'' +
                 ", version='" + version + '\'' +
