@@ -6,7 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.huami.watch.watchface.model.WatchFaceModule;
 import com.huami.watch.watchface.utils.LogUtils;
-import com.huami.watch.watchface.utils.XmlUtils;
+import com.huami.watch.watchface.utils.XmlModuleUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,12 +53,12 @@ public class TestWatchFaceXml {
                 "\n" +
                 "report bug,request or just want to say hi : 2821368478@qq/deuge7746@gmail.com]]></description>");
 
-       String result =  XmlUtils.transforWatchFaceToXml(watchFace);
+       String result =  XmlModuleUtils.transforWatchFaceToXml(watchFace);
         LogUtils.print(TAG, "testToString:"+ result);
 
 
 
-       WatchFaceModule resultWatchFace  = XmlUtils.getWatchFaceFromXmlString(result);
+       WatchFaceModule resultWatchFace  = XmlModuleUtils.getModelFromXmlString(result,WatchFaceModule.class);
         LogUtils.print(TAG, "result:"+ resultWatchFace.toString());
 
 

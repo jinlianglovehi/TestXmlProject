@@ -14,33 +14,34 @@ import java.io.InputStream;
 
 /**
  * xml 处理工具类
+ * 支持泛型实体类型
  */
-public class XmlUtils {
+public class XmlModuleUtils {
 
-    private static final String TAG = XmlUtils.class.getSimpleName();
+    private static final String TAG = XmlModuleUtils.class.getSimpleName();
 
 
     /**
-     * 从xml 文件中获取watchFace
+     * 从xml 文件中获取 model
      * @param filePath
      * @return
      */
-    public static WatchFaceModule getWatchFaceFromXmlFilePath(String filePath){
+    public static <T> T getModelFromXmlFilePath(String filePath,Class<T> clss){
 
-        LogUtils.print(TAG, "getWatchFaceFromXmlFilePath");
+        LogUtils.print(TAG, "getModelFromXmlFilePath");
         File file = new File(filePath);
         if(!file.exists()){
-            LogUtils.print(TAG, "getWatchFaceFromXmlPath file is not exist ");
+            LogUtils.print(TAG, "getModelFromXmlFilePath file is not exist ");
            return  null;
         }
-        WatchFaceModule watchFace = null ;
+        T watchFace = null ;
         try {
             InputStream inputStream =new FileInputStream(filePath);
-            watchFace = getWatchFaceFromInputStream(inputStream);
+            watchFace = getModelFromInputStream(inputStream,clss);
             printWatchFaceStatus(watchFace);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            LogUtils.print(TAG, "getWatchFaceFromXmlPath error ");
+            LogUtils.print(TAG, "getModelFromXmlFilePath error ");
             return  null ;
         }
         return  watchFace;
@@ -49,25 +50,25 @@ public class XmlUtils {
 
 
     /**
-     * 按照输入流方式获取watchFace
+     * 按照输入流方式获取 model
      *
      * @param inputStream
      * @return
      */
-    public static WatchFaceModule getWatchFaceFromInputStream(InputStream inputStream ){
+    public static <T> T getModelFromInputStream(InputStream inputStream,Class<T> clss ){
 
 
-        LogUtils.print(TAG, "getWatchFaceFromInputStream");
+        LogUtils.print(TAG, "getModelFromInputStream");
         if(inputStream==null){
-            LogUtils.print(TAG, "getWatchFaceFromInputStream");
+            LogUtils.print(TAG, "getModelFromInputStream  inputStream is null ");
             return null;
         }
-        WatchFaceModule watchFace  = null;
+        T watchFace  = null;
         if(inputStream!=null) {
             XStream xstream = new XStream();
-            xstream.processAnnotations(WatchFaceModule.class);
+            xstream.processAnnotations(clss.getClass());
 //            xstream.aliasField("name_zh", WatchFaceModule.class, "zhName");
-            watchFace = (WatchFaceModule) xstream.fromXML(inputStream);
+            watchFace = (T) xstream.fromXML(inputStream);
         }
 
         printWatchFaceStatus(watchFace);
@@ -81,23 +82,22 @@ public class XmlUtils {
      * @param xmlString
      * @return
      */
-    public static WatchFaceModule getWatchFaceFromXmlString(String xmlString){
+    public static <T> T getModelFromXmlString(String xmlString,Class<T> clss){
 
 
-        LogUtils.print(TAG, "getWatchFaceFromXmlString");
-        WatchFaceModule watchFace = null ;
+        LogUtils.print(TAG, "getModelFromXmlString");
+        T  watchFace = null ;
         if(xmlString==null){
-            LogUtils.print(TAG, "getWatchFaceFromXmlString:xmlString is null ");
-           return watchFace ;
+            LogUtils.print(TAG, "getModelFromXmlString:xmlString is null ");
+           return watchFace;
         }else {
             XStream xStream = new XStream();
-
             xStream.processAnnotations(WatchFaceModule.class);
-            watchFace = (WatchFaceModule) xStream.fromXML(xmlString);
+            watchFace = (T) xStream.fromXML(xmlString);
             if(watchFace!=null){
-                LogUtils.print(TAG, "getWatchFaceFromXmlString_watchFace:"+watchFace.toString());
+                LogUtils.print(TAG, "getModelFromXmlString_watchFace:"+watchFace.toString());
             }else{
-                LogUtils.print(TAG, "getWatchFaceFromXmlString watchFace is null ");
+                LogUtils.print(TAG, "getModelFromXmlString watchFace is null ");
 
             }
         }
@@ -124,10 +124,10 @@ public class XmlUtils {
     // ########### 辅助log的打印  #############
 
     /**
-     * 判断输出的是 watchFace 是否为空
+     * 判断输出的是 Object 是否为空
      * @return
      */
-    public static void printWatchFaceStatus(WatchFaceModule watchFace){
+    public static void printWatchFaceStatus(Object watchFace){
         if(watchFace==null){
             LogUtils.print(TAG, "printWatchFaceStatus: watchFace is null ");
         }else {

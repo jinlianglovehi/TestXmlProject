@@ -7,7 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.huami.watch.watchface.model.WatchFaceModule;
 import com.huami.watch.watchface.model.WatchFaceModuleItem;
 import com.huami.watch.watchface.utils.LogUtils;
-import com.huami.watch.watchface.utils.XmlUtils;
+import com.huami.watch.watchface.utils.XmlModuleUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class TestXmlCreate {
 
 
         try {
-           WatchFaceModule watchFace  = XmlUtils.getWatchFaceFromInputStream(appContext.getAssets().open("watchface_simple.xml"));
+           WatchFaceModule watchFace  = XmlModuleUtils.getModelFromInputStream(appContext.getAssets().open("watchface_simple.xml"),WatchFaceModule.class);
             if (watchFace!=null){
                 LogUtils.sysPrint(TAG,watchFace.toString());
 
