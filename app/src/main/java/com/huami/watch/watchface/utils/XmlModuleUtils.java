@@ -6,6 +6,7 @@ package com.huami.watch.watchface.utils;
 
 import com.huami.watch.watchface.model.WatchFaceModule;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.mapper.CannotResolveClassException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -65,10 +66,20 @@ public class XmlModuleUtils {
         }
         T watchFace  = null;
         if(inputStream!=null) {
-            XStream xstream = new XStream();
-            xstream.processAnnotations(clss.getClass());
-//            xstream.aliasField("name_zh", WatchFaceModule.class, "zhName");
-            watchFace = (T) xstream.fromXML(inputStream);
+            try{
+                XStream xstream = new XStream();
+                xstream.processAnnotations(clss);
+                watchFace = (T) xstream.fromXML(inputStream);
+            }catch (CannotResolveClassException exception){
+                LogUtils.print(TAG, "getModelFromInputStream CannotResolveClassException ");
+                exception.printStackTrace();
+              
+            }catch(Exception e){
+                LogUtils.print(TAG, "getModelFromInputStream other exception ");
+                e.printStackTrace();
+                
+            }
+
         }
 
         printWatchFaceStatus(watchFace);

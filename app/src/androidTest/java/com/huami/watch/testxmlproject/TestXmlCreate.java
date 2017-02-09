@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.huami.watch.watchface.model.WatchFaceInfoModule;
 import com.huami.watch.watchface.model.WatchFaceModule;
 import com.huami.watch.watchface.model.WatchFaceModuleItem;
 import com.huami.watch.watchface.utils.LogUtils;
@@ -48,14 +49,14 @@ public class TestXmlCreate {
             if (watchFace!=null){
                 LogUtils.sysPrint(TAG,watchFace.toString());
 
-                LogUtils.sysPrint(TAG,"----watchFaceItemSize:"+ watchFace.getWatchFaceItemList().size());
-
-                List<WatchFaceModuleItem> list = watchFace.getWatchFaceItemList();
-                for (WatchFaceModuleItem item  : list
-                     ) {
-                    LogUtils.sysPrint(TAG,item.toString());
-
-                }
+//                LogUtils.sysPrint(TAG,"----watchFaceItemSize:"+ watchFace.getWatchFaceItemList().size());
+//
+//                List<WatchFaceModuleItem> list = watchFace.getWatchFaceItemList();
+//                for (WatchFaceModuleItem item  : list
+//                     ) {
+//                    LogUtils.sysPrint(TAG,item.toString());
+//
+//                }
 
             }else {
 
